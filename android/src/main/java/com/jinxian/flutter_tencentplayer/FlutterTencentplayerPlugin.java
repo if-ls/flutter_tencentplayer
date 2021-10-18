@@ -417,6 +417,15 @@ public class FlutterTencentplayerPlugin implements MethodCallHandler {
         private void dealCallToFlutterData(String type, TXVodDownloadMediaInfo txVodDownloadMediaInfo) {
             HashMap<String, Object> targetMap = Util.convertToMap(txVodDownloadMediaInfo);
             targetMap.put("downloadStatus", type);
+
+            double progress = Double.parseDouble(targetMap.get("progress") + "");
+            double download = Double.parseDouble(targetMap.get("downloadSegments") + "");
+            double segments = Double.parseDouble(targetMap.get("segments") + "");
+
+            if (progress == 0 && segments != 0) {
+                targetMap.put("progress", (download / segments) + "");
+            }
+
             if (txVodDownloadMediaInfo.getDataSource() != null) {
                 targetMap.put("quanlity", txVodDownloadMediaInfo.getDataSource().getQuality());
                 targetMap.putAll(Util.convertToMap(txVodDownloadMediaInfo.getDataSource().getAuthBuilder()));

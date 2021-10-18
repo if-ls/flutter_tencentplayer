@@ -83,8 +83,8 @@ class DownloadValue {
       playPath: json['playPath'] as String,
       isStop: json['isStop'] == "true",
       url: json['url'] as String,
-      fileId: json['fileId'] as String,
-      error: json['error'] as String,
+      fileId: json['fileId'],
+      error: json['error'],
     );
   }
 }
